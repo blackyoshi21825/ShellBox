@@ -6,9 +6,9 @@ BIN=bin
 UTILS = cpuinfo meminfo file_search netstat
 EXTRA = copytree deltree file_info find_duplicates hello
 
-all: $(addprefix $(BIN)/shellbox-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
+all: $(addprefix $(BIN)/sb-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
 
-$(BIN)/shellbox-%: $(SRC)/%.c
+$(BIN)/sb-%: $(SRC)/%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 $(BIN)/%: $(SRC)/%.c
@@ -18,63 +18,63 @@ clean:
 	rm -f $(BIN)/*
 
 # Run compiled C programs
-shellbox-hello:
+sb-hello: $(BIN)/hello
 	@./bin/hello
 
-shellbox-cpuinfo:
-	@./bin/shellbox-cpuinfo
+sb-cpuinfo: $(BIN)/sb-cpuinfo
+	@./bin/sb-cpuinfo
 
-shellbox-meminfo:
-	@./bin/shellbox-meminfo
+sb-meminfo: $(BIN)/sb-meminfo
+	@./bin/sb-meminfo
 
-shellbox-file-search:
-	@./bin/shellbox-file_search
+sb-file-search: $(BIN)/sb-file_search
+	@./bin/sb-file_search
 
-shellbox-netstat:
-	@./bin/shellbox-netstat
+sb-netstat: $(BIN)/sb-netstat
+	@./bin/sb-netstat
 
-shellbox-copytree:
+sb-copytree: $(BIN)/copytree
 	@./bin/copytree
 
-shellbox-deltree:
+sb-deltree: $(BIN)/deltree
 	@./bin/deltree
 
-shellbox-file-info:
+sb-file-info: $(BIN)/file_info
 	@./bin/file_info
 
-shellbox-find-duplicates:
+sb-find-duplicates: $(BIN)/find_duplicates
 	@./bin/find_duplicates
 
 # Run shell scripts
-shellbox-backup:
+sb-backup:
 	bash scripts/backup.sh
 
-shellbox-delete-empty-dirs:
+sb-delete-empty-dirs:
 	bash scripts/delete_empty_dirs.sh
 
-shellbox-disk-usage:
+sb-disk-usage:
 	bash scripts/disk_usage.sh
 
-shellbox-find-large-files:
+sb-find-large-files:
 	bash scripts/find_large_files.sh
 
-shellbox-folder-size:
+sb-folder-size:
 	bash scripts/folder_size.sh
 
-shellbox-move-files:
+sb-move-files:
 	bash scripts/move_files.sh
 
-shellbox-network-info:
+sb-network-info:
 	bash scripts/network_info.sh
 
-shellbox-process-list:
+sb-process-list:
 	bash scripts/process_list.sh
 
-shellbox-rename-batch:
+sb-rename-batch:
 	bash scripts/rename_batch.sh
 
-shellbox-sync-dirs:
+sb-sync-dirs:
 	bash scripts/sync_dirs.sh
 
-shellbox-sys-info:
+sb-sys-info:
 	bash scripts/sys_info.sh

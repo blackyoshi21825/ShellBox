@@ -3,7 +3,7 @@ CFLAGS=-Wall -O2
 SRC=src
 BIN=bin
 
-UTILS = cpuinfo meminfo file_search netstat
+UTILS = cpuinfo meminfo file_search netstat grep
 EXTRA = copytree deltree file_info find_duplicates hello
 
 all: $(addprefix $(BIN)/sb-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
@@ -44,6 +44,13 @@ sb-file-info: $(BIN)/file_info
 
 sb-find-duplicates: $(BIN)/find_duplicates
 	@./bin/find_duplicates
+
+sb-grep: $(BIN)/sb-grep
+	@if [ -z "$(PATTERN)" ] || [ -z "$(FILE)" ]; then \
+		echo "Usage: make sb-grep PATTERN='pattern' FILE='filename'"; \
+	else \
+		./bin/sb-grep "$(PATTERN)" "$(FILE)"; \
+	fi
 
 # Run shell scripts
 sb-backup:

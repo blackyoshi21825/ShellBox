@@ -28,6 +28,9 @@ Removes all compiled binaries from the `bin/` directory.
 - `make sb-copytree` - Copy directory trees
 - `make sb-deltree` - Delete directory trees
 
+### Text Processing
+- `make sb-grep` - Search text patterns in files with regex support
+
 ### Utilities
 - `make sb-hello` - Hello world program
 

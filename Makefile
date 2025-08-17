@@ -4,7 +4,7 @@ SRC=src
 BIN=bin
 
 UTILS = cpuinfo meminfo file_search netstat grep hash uptime
-EXTRA = copytree deltree file_info find_duplicates hello
+EXTRA = copytree deltree file_info find_duplicates hello shellbox
 
 all: $(addprefix $(BIN)/sb-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
 
@@ -124,3 +124,8 @@ sb-port-check:
 	else \
 		bash scripts/port_check.sh "$(HOST)" "$(PORT)" "$(TIMEOUT)"; \
 	fi
+
+# Run Shell Box Terminal
+shellbox: $(BIN)/shellbox
+	@clear
+	@./bin/shellbox

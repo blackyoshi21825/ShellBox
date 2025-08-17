@@ -9,6 +9,7 @@
 
 void print_banner()
 {
+    printf("\033[2J\033[H");
     printf(GREEN);
     printf(" ____  _          _ _ ____            \n");
     printf("/ ___|| |__   ___| | | __ )  _____  __\n");

@@ -1,4 +1,8 @@
 #!/bin/bash
 # Show disk usage summary
 
-du -h --max-depth=1
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    du -h -d 1
+else
+    du -h --max-depth=1
+fi

@@ -16,7 +16,7 @@ void print_banner()
     printf("\\___ \\| '_ \\ / _ \\ | |  _ \\ / _ \\ \\/ /\n");
     printf(" ___) | | | |  __/ | | |_) | (_) >  < \n");
     printf("|____/|_| |_|\\___|_|_|____/ \\___/_/\\_\\\n");
-    printf("\nWelcome to Shell Box - Cross-platform utility suite\n");
+    printf("\nWelcome to ShellBox - Cross-platform utility suite\n");
     printf("Type 'help' for commands, 'exit' to quit\n\n");
     printf(RESET);
 }
@@ -76,15 +76,19 @@ void execute_command(char *cmd)
     {
         // Get the directory where shellbox is located
         char shellbox_path[512];
-        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path)-1);
-        if (len != -1) {
+        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path) - 1);
+        if (len != -1)
+        {
             shellbox_path[len] = '\0';
             char *last_slash = strrchr(shellbox_path, '/');
-            if (last_slash) {
+            if (last_slash)
+            {
                 *last_slash = '\0'; // Remove /shellbox, now points to /bin
             }
             snprintf(full_cmd, sizeof(full_cmd), "%s/sb-%s", shellbox_path, cmd);
-        } else {
+        }
+        else
+        {
             snprintf(full_cmd, sizeof(full_cmd), "./bin/sb-%s", cmd);
         }
         if (access(full_cmd, F_OK) == 0)
@@ -93,9 +97,12 @@ void execute_command(char *cmd)
         }
         else
         {
-            if (len != -1) {
+            if (len != -1)
+            {
                 snprintf(full_cmd, sizeof(full_cmd), "%s/%s", shellbox_path, cmd);
-            } else {
+            }
+            else
+            {
                 snprintf(full_cmd, sizeof(full_cmd), "./bin/%s", cmd);
             }
             if (access(full_cmd, F_OK) == 0)
@@ -113,36 +120,49 @@ void execute_command(char *cmd)
         // Try shell scripts - convert dashes to underscores
         char script_name[256];
         strcpy(script_name, cmd);
-        for (int i = 0; script_name[i]; i++) {
-            if (script_name[i] == '-') script_name[i] = '_';
+        for (int i = 0; script_name[i]; i++)
+        {
+            if (script_name[i] == '-')
+                script_name[i] = '_';
         }
         // Get the directory where shellbox is located
         char shellbox_path[512];
         char base_path[512];
-        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path)-1);
-        if (len != -1) {
+        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path) - 1);
+        if (len != -1)
+        {
             shellbox_path[len] = '\0';
             strcpy(base_path, shellbox_path);
             char *last_slash = strrchr(base_path, '/');
-            if (last_slash) {
+            if (last_slash)
+            {
                 *last_slash = '\0'; // Remove /shellbox
                 last_slash = strrchr(base_path, '/');
-                if (last_slash) {
+                if (last_slash)
+                {
                     *last_slash = '\0'; // Remove /bin
                 }
             }
             snprintf(full_cmd, sizeof(full_cmd), "%s/scripts/%s.sh", base_path, script_name);
-        } else {
+        }
+        else
+        {
             snprintf(full_cmd, sizeof(full_cmd), "./scripts/%s.sh", script_name);
         }
-        if (access(full_cmd, F_OK) == 0) {
-            if (len != -1) {
+        if (access(full_cmd, F_OK) == 0)
+        {
+            if (len != -1)
+            {
                 snprintf(full_cmd, sizeof(full_cmd), "bash %s/scripts/%s.sh", base_path, script_name);
-            } else {
+            }
+            else
+            {
                 snprintf(full_cmd, sizeof(full_cmd), "bash ./scripts/%s.sh", script_name);
             }
             system(full_cmd);
-        } else {
+        }
+        else
+        {
             printf("Command not found: %s\n", cmd);
         }
     }

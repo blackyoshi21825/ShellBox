@@ -20,6 +20,7 @@ Removes all compiled binaries from the `bin/` directory.
 - `make sb-cpuinfo` - Display CPU information
 - `make sb-meminfo` - Display memory information
 - `make sb-netstat` - Display network statistics
+- `make sb-uptime` - Display system uptime and load averages
 
 ### File Operations
 - `make sb-file-search` - Search for files
@@ -30,6 +31,9 @@ Removes all compiled binaries from the `bin/` directory.
 
 ### Text Processing
 - `make sb-grep` - Search text patterns in files with regex support
+
+### Security & Hashing
+- `make sb-hash FILE='filename' [TYPE='md5|sha256']` - Calculate file hashes
 
 ### Utilities
 - `make sb-hello` - Hello world program
@@ -52,3 +56,12 @@ Removes all compiled binaries from the `bin/` directory.
 - `make sb-sys-info` - Display system information
 - `make sb-network-info` - Display network information
 - `make sb-process-list` - List running processes
+
+### Development Tools
+- `make sb-encode ACTION='encode|decode' TYPE='base64|url' TEXT='text'` - Encode/decode text
+- `make sb-json ACTION='format|validate|minify' [FILE='filename']` - JSON processing
+- `make sb-git-stats` - Git repository statistics
+
+### Network Tools
+- `make sb-port-check HOST='hostname' PORT='port'` - Check port connectivity
+- `make sb-port-check ACTION='scan' HOST='hostname' START='start_port' END='end_port'` - Port scanning

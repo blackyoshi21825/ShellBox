@@ -3,7 +3,7 @@ CFLAGS=-Wall -O2
 SRC=src
 BIN=bin
 
-UTILS = cpuinfo meminfo file_search netstat grep
+UTILS = cpuinfo meminfo file_search netstat grep hash uptime
 EXTRA = copytree deltree file_info find_duplicates hello
 
 all: $(addprefix $(BIN)/sb-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
@@ -85,3 +85,42 @@ sb-sync-dirs:
 
 sb-sys-info:
 	bash scripts/sys_info.sh
+
+sb-hash: $(BIN)/sb-hash
+	@if [ -z "$(FILE)" ]; then \
+		echo "Usage: make sb-hash FILE='filename' [TYPE='md5|sha256']"; \
+	else \
+		./bin/sb-hash "$(FILE)" "$(TYPE)"; \
+	fi
+
+sb-uptime: $(BIN)/sb-uptime
+	@./bin/sb-uptime
+
+sb-encode:
+	@if [ -z "$(ACTION)" ] || [ -z "$(TYPE)" ] || [ -z "$(TEXT)" ]; then \
+		echo "Usage: make sb-encode ACTION='encode|decode' TYPE='base64|url' TEXT='text'"; \
+	else \
+		bash scripts/encode.sh "$(ACTION)" "$(TYPE)" "$(TEXT)"; \
+	fi
+
+sb-json:
+	@if [ -z "$(ACTION)" ]; then \
+		echo "Usage: make sb-json ACTION='format|validate|minify' [FILE='filename']"; \
+	elif [ -n "$(FILE)" ]; then \
+		bash scripts/json_format.sh "$(ACTION)" "$(FILE)"; \
+	else \
+		echo "Pipe JSON to this command or specify FILE parameter"; \
+	fi
+
+sb-git-stats:
+	bash scripts/git_stats.sh
+
+sb-port-check:
+	@if [ -z "$(HOST)" ] || [ -z "$(PORT)" ]; then \
+		echo "Usage: make sb-port-check HOST='hostname' PORT='port' [TIMEOUT='seconds']"; \
+		echo "       make sb-port-check ACTION='scan' HOST='hostname' START='start_port' END='end_port'"; \
+	elif [ "$(ACTION)" = "scan" ]; then \
+		bash scripts/port_check.sh scan "$(HOST)" "$(START)" "$(END)"; \
+	else \
+		bash scripts/port_check.sh "$(HOST)" "$(PORT)" "$(TIMEOUT)"; \
+	fi

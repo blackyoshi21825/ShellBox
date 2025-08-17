@@ -74,15 +74,30 @@ void execute_command(char *cmd)
         strcmp(cmd, "deltree") == 0 || strcmp(cmd, "grep") == 0 ||
         strcmp(cmd, "hash") == 0)
     {
-
-        snprintf(full_cmd, sizeof(full_cmd), "./bin/sb-%s", cmd);
+        // Get the directory where shellbox is located
+        char shellbox_path[512];
+        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path)-1);
+        if (len != -1) {
+            shellbox_path[len] = '\0';
+            char *last_slash = strrchr(shellbox_path, '/');
+            if (last_slash) {
+                *last_slash = '\0'; // Remove /shellbox, now points to /bin
+            }
+            snprintf(full_cmd, sizeof(full_cmd), "%s/sb-%s", shellbox_path, cmd);
+        } else {
+            snprintf(full_cmd, sizeof(full_cmd), "./bin/sb-%s", cmd);
+        }
         if (access(full_cmd, F_OK) == 0)
         {
             system(full_cmd);
         }
         else
         {
-            snprintf(full_cmd, sizeof(full_cmd), "./bin/%s", cmd);
+            if (len != -1) {
+                snprintf(full_cmd, sizeof(full_cmd), "%s/%s", shellbox_path, cmd);
+            } else {
+                snprintf(full_cmd, sizeof(full_cmd), "./bin/%s", cmd);
+            }
             if (access(full_cmd, F_OK) == 0)
             {
                 system(full_cmd);
@@ -101,9 +116,31 @@ void execute_command(char *cmd)
         for (int i = 0; script_name[i]; i++) {
             if (script_name[i] == '-') script_name[i] = '_';
         }
-        snprintf(full_cmd, sizeof(full_cmd), "./scripts/%s.sh", script_name);
+        // Get the directory where shellbox is located
+        char shellbox_path[512];
+        char base_path[512];
+        ssize_t len = readlink("/proc/self/exe", shellbox_path, sizeof(shellbox_path)-1);
+        if (len != -1) {
+            shellbox_path[len] = '\0';
+            strcpy(base_path, shellbox_path);
+            char *last_slash = strrchr(base_path, '/');
+            if (last_slash) {
+                *last_slash = '\0'; // Remove /shellbox
+                last_slash = strrchr(base_path, '/');
+                if (last_slash) {
+                    *last_slash = '\0'; // Remove /bin
+                }
+            }
+            snprintf(full_cmd, sizeof(full_cmd), "%s/scripts/%s.sh", base_path, script_name);
+        } else {
+            snprintf(full_cmd, sizeof(full_cmd), "./scripts/%s.sh", script_name);
+        }
         if (access(full_cmd, F_OK) == 0) {
-            snprintf(full_cmd, sizeof(full_cmd), "bash ./scripts/%s.sh", script_name);
+            if (len != -1) {
+                snprintf(full_cmd, sizeof(full_cmd), "bash %s/scripts/%s.sh", base_path, script_name);
+            } else {
+                snprintf(full_cmd, sizeof(full_cmd), "bash ./scripts/%s.sh", script_name);
+            }
             system(full_cmd);
         } else {
             printf("Command not found: %s\n", cmd);

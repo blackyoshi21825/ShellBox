@@ -3,7 +3,7 @@ CFLAGS=-Wall -O2
 SRC=src
 BIN=bin
 
-UTILS = cpuinfo meminfo file_search netstat grep hash uptime
+UTILS = cpuinfo meminfo file_search netstat grep hash uptime diskinfo
 EXTRA = copytree deltree file_info find_duplicates hello shellbox
 
 all: $(addprefix $(BIN)/sb-,$(UTILS)) $(addprefix $(BIN)/,$(EXTRA))
@@ -95,6 +95,9 @@ sb-hash: $(BIN)/sb-hash
 
 sb-uptime: $(BIN)/sb-uptime
 	@./bin/sb-uptime
+
+sb-diskinfo: $(BIN)/sb-diskinfo
+	@./bin/sb-diskinfo
 
 sb-encode:
 	@if [ -z "$(ACTION)" ] || [ -z "$(TYPE)" ] || [ -z "$(TEXT)" ]; then \

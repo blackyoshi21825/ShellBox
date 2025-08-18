@@ -25,7 +25,7 @@ void print_help()
 {
     printf(GREEN "Available Commands:\n" RESET);
     printf("  System Info:\n");
-    printf("    cpuinfo, meminfo, netstat, uptime, sys-info\n");
+    printf("    cpuinfo, meminfo, netstat, uptime, diskinfo, sys-info\n");
     printf("  File Operations:\n");
     printf("    file-search, file-info, find-duplicates, copytree, deltree\n");
     printf("  Text Processing:\n");
@@ -69,10 +69,10 @@ void execute_command(char *cmd)
     if (strstr(cmd, "sb-") == cmd ||
         strcmp(cmd, "cpuinfo") == 0 || strcmp(cmd, "meminfo") == 0 ||
         strcmp(cmd, "netstat") == 0 || strcmp(cmd, "uptime") == 0 ||
-        strcmp(cmd, "file-search") == 0 || strcmp(cmd, "file-info") == 0 ||
-        strcmp(cmd, "find-duplicates") == 0 || strcmp(cmd, "copytree") == 0 ||
-        strcmp(cmd, "deltree") == 0 || strcmp(cmd, "grep") == 0 ||
-        strcmp(cmd, "hash") == 0)
+        strcmp(cmd, "diskinfo") == 0 || strcmp(cmd, "file-search") == 0 ||
+        strcmp(cmd, "file-info") == 0 || strcmp(cmd, "find-duplicates") == 0 ||
+        strcmp(cmd, "copytree") == 0 || strcmp(cmd, "deltree") == 0 ||
+        strcmp(cmd, "grep") == 0 || strcmp(cmd, "hash") == 0)
     {
         // Get the directory where shellbox is located
         char shellbox_path[512];

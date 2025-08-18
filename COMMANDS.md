@@ -21,6 +21,7 @@ Removes all compiled binaries from the `bin/` directory.
 - `make sb-meminfo` - Display memory information
 - `make sb-netstat` - Display network statistics
 - `make sb-uptime` - Display system uptime and load averages
+- `make sb-diskinfo` - Display disk usage, filesystem types, and mount points
 
 ### File Operations
 - `make sb-file-search` - Search for files

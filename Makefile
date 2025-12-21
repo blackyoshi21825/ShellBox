@@ -128,6 +128,45 @@ sb-port-check:
 		bash scripts/port_check.sh "$(HOST)" "$(PORT)" "$(TIMEOUT)"; \
 	fi
 
+# Security Tools
+sb-nmap-scan:
+	@if [ -z "$(TARGET)" ]; then \
+		echo "Usage: make sb-nmap-scan TARGET='target' [TYPE='quick|stealth|service|os|vuln']"; \
+	else \
+		bash scripts/nmap_scan.sh "$(TARGET)" "$(TYPE)"; \
+	fi
+
+sb-subdomain-enum:
+	@if [ -z "$(DOMAIN)" ]; then \
+		echo "Usage: make sb-subdomain-enum DOMAIN='domain.com' [WORDLIST='path/to/wordlist']"; \
+	else \
+		bash scripts/subdomain_enum.sh "$(DOMAIN)" "$(WORDLIST)"; \
+	fi
+
+sb-dir-brute:
+	@if [ -z "$(URL)" ]; then \
+		echo "Usage: make sb-dir-brute URL='http://example.com' [WORDLIST='path/to/wordlist']"; \
+	else \
+		bash scripts/dir_brute.sh "$(URL)" "$(WORDLIST)"; \
+	fi
+
+sb-hash-crack:
+	@if [ -z "$(HASH)" ] || [ -z "$(TYPE)" ]; then \
+		echo "Usage: make sb-hash-crack HASH='hash_value' TYPE='md5|sha1|sha256' [WORDLIST='path/to/wordlist']"; \
+	else \
+		bash scripts/hash_crack.sh "$(HASH)" "$(TYPE)" "$(WORDLIST)"; \
+	fi
+
+sb-wifi-scan:
+	bash scripts/wifi_scan.sh "$(INTERFACE)"
+
+sb-banner-grab:
+	@if [ -z "$(HOST)" ] || [ -z "$(PORT)" ]; then \
+		echo "Usage: make sb-banner-grab HOST='hostname' PORT='port' [TIMEOUT='seconds']"; \
+	else \
+		bash scripts/banner_grab.sh "$(HOST)" "$(PORT)" "$(TIMEOUT)"; \
+	fi
+
 # Run Shell Box Terminal
 shellbox: $(BIN)/shellbox
 	@clear

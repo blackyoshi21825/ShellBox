@@ -59,7 +59,7 @@ Once in the ShellBox terminal, use these commands:
 - `ns` (netstat) - Display network statistics
 - `up` (uptime) - Display system uptime and load
 - `di` (diskinfo) - Display disk usage and mount points
-- `si` (sys-info) - Comprehensive system information
+- `si` (sys-info) - Comprehensive system information 
 
 ### File Operations
 - `fs` (file-search) - Search for files

@@ -14,10 +14,12 @@
 ## ✨ Features
 
 - 🖥️ **Custom Terminal Interface** - Beautiful interactive shell with colored output
-- 🔧 **System Tools** - CPU info, memory stats, network monitoring
-- 📁 **File Operations** - Search, copy, hash, and manage files
-- 🌐 **Network Utilities** - Port scanning and connectivity checks
+- 🔧 **System Tools** - CPU info, memory stats, disk usage, network monitoring, uptime
+- 📁 **File Operations** - Search, copy, hash, duplicate detection, tree operations
+- 🌐 **Network Utilities** - Port scanning, connectivity checks, network info
 - 📊 **Development Tools** - Git stats, JSON formatting, encoding utilities
+- 🔍 **Text Processing** - Grep with regex support
+- 💾 **System Analysis** - Process monitoring, disk usage analysis
 
 ## 🚀 Quick Start
 
@@ -45,6 +47,46 @@ make shellbox
 - `scripts/`: Bash/shell scripts  
 - `src/`: C source code
 - `launch.*`: Quick start scripts
+
+## 📋 Available Commands
+
+Once in the ShellBox terminal, use these commands:
+
+### System Information
+- `cpuinfo` - Display CPU information
+- `meminfo` - Display memory information  
+- `netstat` - Display network statistics
+- `uptime` - Display system uptime and load
+- `diskinfo` - Display disk usage and mount points
+- `sys-info` - Comprehensive system information
+
+### File Operations
+- `file-search` - Search for files
+- `file-info` - Display detailed file information
+- `find-duplicates` - Find duplicate files
+- `copytree` - Copy directory trees
+- `deltree` - Delete directory trees
+
+### Text Processing
+- `grep` - Search text patterns with regex support
+- `hash` - Calculate file hashes (MD5, SHA256)
+
+### System Tools
+- `backup` - Backup files and directories
+- `disk-usage` - Display disk usage information
+- `process-list` - List running processes
+- `port-check` - Check port connectivity
+- `network-info` - Display network information
+
+### Development Tools
+- `encode` - Encode/decode text (base64, URL)
+- `json` - Format, validate, or minify JSON
+- `git-stats` - Git repository statistics
+
+### Terminal Commands
+- `help` - Show available commands
+- `clear` - Clear screen and show banner
+- `exit` - Exit ShellBox
 
 ## 🛠️ Traditional Usage
 
